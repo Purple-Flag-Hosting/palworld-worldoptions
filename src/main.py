@@ -12,8 +12,8 @@ IS_INTERACTIVE = False
 
 def exceptionhook(type, value, traceback, oldhook=sys.excepthook):
     oldhook(type, value, traceback)
-    print("Looks like you encountered a critical error")
-    print("Check your settings and open a bug report if the issue persists")
+    print("There was a critical error generting the worldoptions.sav file")
+    print("Please contact support with the error message above")
     if IS_INTERACTIVE:
         input("Press RETURN to close")
 
@@ -32,9 +32,7 @@ def settings_check(path: str) -> None:
 
 
 def uesave_check(path: str) -> None:
-    if os.path.isfile(path):
-        print("Found uesave")
-    else:
+    if not os.path.isfile(path):
         print(f"uesave does not exist at {path}")
         if IS_INTERACTIVE:
             input("Press RETURN to close")
@@ -53,7 +51,6 @@ def convert_to_worldoptions(uesave_path: str, settings_file: str, output_path: s
     config_settings_json = create_palworldsettings(settings_file)
     save_worldoptions(uesave_path, config_settings_json, output_path)
     print("Complete!")
-    print("Restart your palworld server to apply the changes")
     if IS_INTERACTIVE:
         input("Press RETURN to close")
 
